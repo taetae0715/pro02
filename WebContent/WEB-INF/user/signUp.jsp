@@ -26,13 +26,14 @@ padding: 24px; border:2px solid #eee; height:600px; overflow-y:auto; }
 					<th>아이디</th>
 					<td>
 						<div class="form-row">
-							<input type="text" name="id" id="id" placeholder="영문소문자 및 숫자를 혼용하여 15글자 이내로 아이디 입력" class="input" pattern="^[a-z0-9]{8,16}" maxlength="15" autofocus required />
+							<input type="text" name="id" id="id" placeholder="영문소문자 및 숫자 조합" 
+							class="input" pattern="^[a-z0-9]{8,16}" maxlength="15" autofocus required />
 							<input type="button" class="btn btn-primary" value="아이디 중복 확인" onclick="idCheck()">
 							<input type="hidden" name="idck" id="idck" value="no">
 						</div>
 						<div>
 							<c:if test="${empty qid }">
-							<p id="msg" style="padding-left:0.5rem">아직 아이디 중복 체크를 하지 않으셨습니다.</p>
+							<p id="msg" style="padding-left:0.5rem">아이디 중복 확인이 필요합니다.</p>
 							</c:if>
 							<c:if test="${not empty qid }">
 							<p id="msg" style="padding-left:0.5rem">아이디 중복 체크 후 수정하였습니다.</p>
@@ -43,13 +44,15 @@ padding: 24px; border:2px solid #eee; height:600px; overflow-y:auto; }
 				<tr>
 					<th>비밀번호</th>
 					<td>
-						<input type="password" name="pw" id="pw" placeholder="비밀번호 입력" class="input" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" maxlength="16" required />
-						<p>비밀번호는 최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함되어야 함</p>
+						<input type="password" name="pw" id="pw" placeholder="비밀번호 입력" class="input"
+						pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" maxlength="16" required />
+						<p>최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함하여 입력</p>
 					</td>
 				</tr>
 				<tr>
 					<th>비밀번호 확인</th>
-					<td><input type="password" name="pw2" id="pw2" placeholder="비밀번호  확인 입력" class="input" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" maxlength="16" required /></td>
+					<td><input type="password" name="pw2" id="pw2" placeholder="비밀번호  확인 입력" class="input" 
+					pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" maxlength="16" required /></td>
 				</tr>
 				<tr>
 					<th>회원이름</th>
@@ -61,13 +64,13 @@ padding: 24px; border:2px solid #eee; height:600px; overflow-y:auto; }
 				</tr>
 				<tr>
 					<th>연락처</th>
-					<td><input type="tel" name="tel" id="tel" maxlength="11" placeholder="전화번호 숫자만 입력 01012345678" class="input" required></td>
+					<td><input type="tel" name="tel" id="tel" maxlength="11" placeholder="ex) 01012345678" class="input" required></td>
 				</tr>
 				<tr>
 					<th>주소</th>
 					<td><input type="text" name="address1" id="address1" placeholder="기본 주소 입력" class="input" required /><br>
 					<input type="text" name="address2" id="address2" placeholder="상세 주소 입력" class="input" required /><br>
-					<input type="text" name="postcode" id="postcode" style="width:160px;float:left;margin-right:20px;" placeholder="우편번호" class="input">
+					<input type="text" name="postcode" id="postcode" placeholder="우편번호" class="input">
 					<button id="post_btn" onclick="findAddr()" class="button is-info">우편번호 검색</button>
 					</td>
 				</tr>

@@ -15,7 +15,7 @@
 					<li><a href="${path }/UserJoin.do">회원가입</a></li>
 				</c:if>
 				<c:if test="${!empty sid }">
-					<li><a href="${path }/MyPage.do">마이페이지</a></li>
+					<li><a href="${path }/MyPage.do">${sid }님의 마이페이지</a></li>
 					<li><a href="${path }/MyCart.do">장바구니</a></li>
 					<li><a href="${path }/UserLogout.do">로그아웃</a></li>
 				</c:if>

@@ -29,13 +29,15 @@
 						<td>
 							<input type="hidden" name="author" id="author" value="${sid }">
 							<input type="hidden" name="idx" id="idx" value="${noti.idx }">
-							<input type="text" name="title" id="title" value="${noti.title }" maxlength="98" title="100자 내로 작성" placeholder="100자 내로 작성" class="form-control" required autofocus>
+							<input type="text" name="title" id="title" value="${noti.title }" maxlength="98" 
+							title="100자 내로 작성" placeholder="100자 내로 작성" class="form-control" required autofocus>
 						</td>
 					</tr>
 					<tr>
 						<th><label for="content">글 내용</label></th>
 						<td>
-							<textarea rows="10" cols="100" name="content" id="content" maxlength="990" title="1000자 내로 작성" class="form-control">${noti.content }</textarea>
+							<textarea rows="10" cols="100" name="content" id="content" maxlength="990" 
+							title="1000자 내로 작성" class="form-control">${noti.content }</textarea>
 						</td>
 					</tr>
 					<tr>

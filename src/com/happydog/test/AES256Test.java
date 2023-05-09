@@ -1,20 +1,20 @@
 package com.happydog.test;
-
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.InvalidParameterSpecException;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-
 import com.crypto.util.AES256;
-
 public class AES256Test {
-	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException, InvalidKeySpecException, NoSuchPaddingException, InvalidParameterSpecException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException {
+	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException, 
+	InvalidKeySpecException, NoSuchPaddingException, InvalidParameterSpecException, 
+	UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException, 
+	InvalidAlgorithmParameterException {
+		
 		String plainText = "1234";
 		String key = "%03x";
 		

@@ -18,5 +18,4 @@ public class UserLogoutCtrl extends HttpServlet {
 		ses.invalidate();
 		response.sendRedirect(request.getContextPath());
 	}
-
 }

@@ -15,7 +15,7 @@ public class UserLoginCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String msg = "아이디와 비밀번호를 입력하여 로그인하시기 바랍니다.";
+		String msg = "아이디와 비밀번호 입력 후 로그인하시기 바랍니다..";
 		request.setAttribute("msg", msg);
 
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/user/login.jsp");

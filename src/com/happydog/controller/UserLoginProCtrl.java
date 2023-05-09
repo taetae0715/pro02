@@ -31,30 +31,21 @@ public class UserLoginProCtrl extends HttpServlet {
 		int cnt = 0;
 
 		try {
-			try {
-				cnt = dao.loginCheck(id, pw);
-			} catch (InvalidParameterSpecException e) {
-				e.printStackTrace();
-			}
+			try { cnt = dao.loginCheck(id, pw); } 
+				catch (InvalidParameterSpecException e) { e.printStackTrace(); }
 		} catch (InvalidKeyException | NoSuchAlgorithmException
 				| InvalidKeySpecException | NoSuchPaddingException | BadPaddingException
 				| IllegalBlockSizeException
-				| InvalidAlgorithmParameterException e) {
-			e.printStackTrace();
-		}
+				| InvalidAlgorithmParameterException e) { e.printStackTrace(); }
 
 		HttpSession ses = request.getSession();
 		String msg = "";
-		if(cnt==1){
-			msg = "로그인 성공";
+		if(cnt==1){ msg = "로그인 성공";
 			ses.setAttribute("sid", id);
 			response.sendRedirect(request.getContextPath());
-		} else if(cnt==9){
-			msg = "아이디 또는 비밀번호가 틀립니다.";
+		} else if(cnt==9){ msg = "아이디 또는 비밀번호가 틀립니다.";
 			response.sendRedirect("UserLogin.do?msg="+msg);	
-		} else {
-			msg = "존재하지 않는 아이디입니다.";
-			response.sendRedirect("UserLogin.do?msg="+msg);
-		}
+		} else { msg = "존재하지 않는 아이디입니다.";
+			response.sendRedirect("UserLogin.do?msg="+msg); }
 	}
 }
