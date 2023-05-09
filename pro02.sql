@@ -18,7 +18,7 @@ delete from notice where idx=?
 select * form user1 where id=? and pw=?;
 
 -- 회원 로그인 시 방문횟수 증가
-update user1 set visted=visted+1 where id=?
+update user1 set visited=visited+1 where id=?
 
 -- 아이디 중복 체크
 select * from user1 where id=?

@@ -28,6 +28,8 @@ public class Oracle11 {
 	final static String UPDATE_USER2 = "update user1 set name=?, tel=?, addr=?, email=? where id=?";
 	final static String DELETE_USER = "delete from user1 where id=?";
 	
+	final static String PRODUCT_SELECT = "select * from product where pro_code=?";
+	
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(DRIVER);
 		Connection conn = DriverManager.getConnection(URL, USER, PASS);
