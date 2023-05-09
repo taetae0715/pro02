@@ -9,6 +9,7 @@ public class Product {
 	private	String	pic1;
 	private	String	pic2;
 	private	String	pic3;
+	private	String	cate;
 	
 	public int getPro_code() {
 		return pro_code;
@@ -63,6 +64,12 @@ public class Product {
 	}
 	public void setPic3(String pic3) {
 		this.pic3 = pic3;
+	}
+	public String getCate() {
+		return cate;
+	}
+	public void setCate(String cate) {
+		this.cate = cate;
 	}
 
 }
