@@ -1,91 +1,38 @@
 package com.happydog.model;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import java.util.HashMap;
 
 import com.happydog.dto.Product;
-import com.happydog.dto.User;
+
 public class ProductDAO {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	public int idCheck(String id) {
-		int cnt = 0;
+	//상품(1개) 상세 보기
+	public Product getProduct(int pro_code){
+		Product pro = new Product();
 		try {
 			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.USER_LOGIN);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if(rs.next()){ cnt = 1; }
-		} catch (ClassNotFoundException e) { e.printStackTrace();
-		} catch (SQLException e) { e.printStackTrace();
-		} finally { Oracle11.close(rs, pstmt, con); }
-		return cnt; }
-	
-	public void userVisitedCount(String id){
-		try {
-			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.USER_VISIT_COUNT);
-			pstmt.setString(1, id);
-			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Oracle11.close(pstmt, con);
-		}
-	}
-	
-	public int insertUser(User user){
-		int cnt = 0;
-		try {
-			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.INSET_USER);
-			pstmt.setString(1, user.getId());
-			pstmt.setString(2, user.getPw());
-			pstmt.setString(3, user.getName());
-			pstmt.setString(4, user.getTel());
-			pstmt.setString(5, user.getAddr());
-			pstmt.setString(6, user.getEmail());
-			cnt = pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Oracle11.close(pstmt, con);
-		}
-		return cnt;
-	}
-	
-	public User myInfo(String id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException{
-		User user = new User();
-		try {
-			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.USER_LOGIN);
-			pstmt.setString(1, id);
+			pstmt = con.prepareStatement(Oracle11.PRODUCT_SELECT_ONE);
+			pstmt.setInt(1, pro_code);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				user.setId(rs.getString("id"));
-				user.setName(rs.getString("name"));
-				user.setTel(rs.getString("tel"));
-				user.setEmail(rs.getString("email"));
-				user.setRegdate(rs.getString("regdate"));
-				user.setAddr(rs.getString("addr"));
-				user.setPoint(rs.getInt("point"));
-				user.setVisited(rs.getInt("visited"));
+				pro.setPro_code(rs.getInt("pro_code"));
+				pro.setPname(rs.getString("pname"));
+				pro.setPstd(rs.getString("pstd"));
+				pro.setPcost(rs.getString("pcost"));
+				pro.setPcom(rs.getString("pcom"));
+				pro.setAmount(rs.getInt("amount"));
+				pro.setPic1(rs.getString("pic1"));
+				pro.setPic2(rs.getString("pic2"));
+				pro.setPic3(rs.getString("pic3"));
+				pro.setCate(rs.getString("cate"));
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -94,87 +41,29 @@ public class ProductDAO {
 		} finally {
 			Oracle11.close(rs, pstmt, con);
 		}
-		return user;
+		return pro;
 	}
 	
-	public int updateUser(User user){
-		int cnt = 0;
+	//상품 전체 목록 불러오기
+	public ArrayList<Product> getProductList(){
+		ArrayList<Product> proList = new ArrayList<Product>();
 		try {
 			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.UPDATE_USER);
-			pstmt.setString(1, user.getPw());
-			pstmt.setString(2, user.getName());
-			pstmt.setString(3, user.getTel());
-			pstmt.setString(4, user.getAddr());
-			pstmt.setString(5, user.getEmail());
-			pstmt.setString(6, user.getId());
-			cnt = pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Oracle11.close(pstmt, con);
-		}
-		return cnt;
-	}
-	
-	public int updateUser2(User user){
-		int cnt = 0;
-		try {
-			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.UPDATE_USER2);
-			pstmt.setString(1, user.getName());
-			pstmt.setString(2, user.getTel());
-			pstmt.setString(3, user.getAddr());
-			pstmt.setString(4, user.getEmail());
-			pstmt.setString(5, user.getId());
-			cnt = pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Oracle11.close(pstmt, con);
-		}
-		return cnt;
-	}
-	
-	
-	public int deleteUser(String id){
-		int cnt = 0;
-		try {
-			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.DELETE_USER);
-			pstmt.setString(1, id);
-			cnt = pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Oracle11.close(pstmt, con);
-		}
-		return cnt;
-	}
-	
-	public ArrayList<User> userList() throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException{
-		ArrayList<User> uList = new ArrayList<User>();
-		try {
-			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.USER_SELECT_ALL);
+			pstmt = con.prepareStatement(Oracle11.PRODUCT_SELECT_ALL);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				User user = new User();
-				user.setId(rs.getString("id"));
-				user.setName(rs.getString("name"));
-				user.setTel(rs.getString("tel"));
-				user.setEmail(rs.getString("email"));
-				user.setRegdate(rs.getString("regdate"));
-				user.setAddr(rs.getString("addr"));
-				user.setPoint(rs.getInt("point"));
-				user.setVisited(rs.getInt("visited"));
-				uList.add(user);
+				Product pro = new Product();
+				pro.setPro_code(rs.getInt("pro_code"));
+				pro.setPname(rs.getString("pname"));
+				pro.setPstd(rs.getString("pstd"));
+				pro.setPcost(rs.getString("pcost"));
+				pro.setPcom(rs.getString("pcom"));
+				pro.setAmount(rs.getInt("amount"));
+				pro.setPic1(rs.getString("pic1"));
+				pro.setPic2(rs.getString("pic2"));
+				pro.setPic3(rs.getString("pic3"));
+				pro.setCate(rs.getString("cate"));
+				proList.add(pro);
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -183,6 +72,65 @@ public class ProductDAO {
 		} finally {
 			Oracle11.close(rs, pstmt, con);
 		}
-		return uList;
+		return proList;
 	}
+	
+	public ArrayList<Product> getCateProductList(String cate){
+		ArrayList<Product> proList = new ArrayList<Product>();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.PRODUCT_CATE_SELECT);
+			pstmt.setString(1, cate);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Product pro = new Product();
+				pro.setPro_code(rs.getInt("pro_code"));
+				pro.setPname(rs.getString("pname"));
+				pro.setPstd(rs.getString("pstd"));
+				pro.setPcost(rs.getString("pcost"));
+				pro.setPcom(rs.getString("pcom"));
+				pro.setAmount(rs.getInt("amount"));
+				pro.setPic1(rs.getString("pic1"));
+				pro.setPic2(rs.getString("pic2"));
+				pro.setPic3(rs.getString("pic3"));
+				pro.setCate(rs.getString("cate"));
+				proList.add(pro);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return proList;
+	}
+	
+	public HashMap<String, String> getCategory(String cate){
+		HashMap<String, String> cateMap = new HashMap<String, String>();
+		String cateGroup = "";
+		String cateName = "";
+		if(cate.length()==2){
+			cate = cate + "01";
+		}
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.PRODUCT_CATENAME_SELECT);
+			pstmt.setString(1, cate);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				cateGroup = "catename";
+				cateName = rs.getString("catename");
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		cateMap.put(cateGroup, cateName);
+		return cateMap;
+	}
+	
 }

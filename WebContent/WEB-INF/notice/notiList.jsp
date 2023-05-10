@@ -18,7 +18,7 @@
 <div class="content" style="padding-top:30px; margin-top:30px; border-top:3px solid #333; min-height:500px; ">
 	<div class="container-fluid">
 		<h2>공지사항</h2>
-		<table class="table">
+		<table class="table" id="tbl">
 			<thead>
 				<tr><th>순번</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
 			</thead>
@@ -45,6 +45,11 @@
 		<div class="btn-group">
 			<a href="${path1 }/InsertNotice.do" class="btn btn-primary">글 등록</a>
 		</div>
+		<script>
+			$(document).ready(function(){
+			    $('#tb1').DataTable({'order': [[0, 'asc']]});
+			});
+		</script>
 	</div>
 </div>
 <%@ include file="../../footer.jsp" %>

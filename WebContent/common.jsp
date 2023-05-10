@@ -33,6 +33,8 @@
 <!-- reset.css나 normalize.css를 CDN 또는 다운로드 받아 link로 연결 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -41,6 +43,3 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<!-- jquery -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>

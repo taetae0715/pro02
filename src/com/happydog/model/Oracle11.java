@@ -12,7 +12,9 @@ public class Oracle11 {
 	static String USER = "system";
 	static String PASS = "1234";
 	
-	final static String NOTICE_SELECT_ALL = "select * from notice";
+	final static String NOTICE_SELECT_ALL = "select * from notice order by resdate desc";
+/*	select * from notice 기존 명령
+	select * from (select * from notice order by resdate desc) where rownum >= 1 and rownum <= 5;*/
 	final static String NOTICE_SELECT_ONE = "select * from notice where idx=?";
 	final static String NOTICE_READCOUNT_UPDATE = "update notice set readcnt=readcnt+1 where idx=?";
 	final static String INSERT_NOTICE = "insert into notice values (idx.nextval, ?, ?, ?, ?, default, default)";
@@ -28,13 +30,18 @@ public class Oracle11 {
 	final static String UPDATE_USER2 = "update user1 set name=?, tel=?, addr=?, email=? where id=?";
 	final static String DELETE_USER = "delete from user1 where id=?";
 	
-	final static String PRODUCT_SELECT = "select * from product where pro_code=?";
+	final static String PRODUCT_CATENAME_SELECT = "select * from category where cate=?";
+	final static String PRODUCT_SELECT_ALL = "select * from product";
+	final static String PRODUCT_SELECT_ONE = "select * from product where pro_code=?";
+	final static String PRODUCT_CATE_SELECT = "select * from product where cate=?";
+	final static String PRODUCT_CATE_SELECT2 = "select * from product where cate like ?||'%'";
+	final static String PRODUCT_CATE_SELECT3 = "select * from product where cate like concat(?, '%')";
+	final static String DELETE_PRODUCT = "delete from user1 where pro_code=?";
 	
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(DRIVER);
 		Connection conn = DriverManager.getConnection(URL, USER, PASS);
-		return conn;
-	}
+		return conn; }
 	
 	public static void close(PreparedStatement pstmt, Connection conn){
 		if(pstmt!=null){
