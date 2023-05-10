@@ -55,7 +55,7 @@ border:1px solid #e0e0f0; text-align:center; }
 							<c:if test="${sid.equals('admin') }">
 								<a href="${path1 }/ReceiptProduct.do?pro_code=${pro.pro_code }" class="btn btn-default" role="button">상품 입고</a>
 								<a href="${path1 }/UpdateProduct.do?pro_code=${pro.pro_code }" class="btn btn-default" role="button">상품 수정</a>
-								<a href="${path1 }/DeleteProduct.do?pro_code=${pro.pro_code }" class="btn btn-danger" role="button">상품 삭제</a>
+								<a href="${path1 }/DelProduct.do?pro_code=${pro.pro_code }" class="btn btn-danger" role="button">상품 삭제</a>
 							</c:if>
 						</div>
 					</div>

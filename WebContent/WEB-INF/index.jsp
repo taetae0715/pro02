@@ -12,6 +12,12 @@
 .content { text-align: center; }
 .container-fluid { width:1280px; }
 .main { width: 1280px; height: 1200px; margin: 0 auto; padding-left: 120px; }
+/* .fix_area { position:fixed; z-index:9999; bottom:40px; right:40px; }
+.fix_area .cir_box { display:block; width: 60px; height: 60px; text-align:center; 
+border-radius:35px; box-sizing: border-box; padding: 6px; font-size:12px; padding-top:15px; 
+overflow:hidden; box-shadow:1px 1px 6px #333; }
+.fix_area .counsel { background-color:rgba(255,255,255,0.75); color:#333; }
+.fix_area .totop { background-color:#dc2c34; color:#fff; margin-top: 20px; } */
 </style>
 </head>
 <body>

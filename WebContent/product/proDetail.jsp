@@ -52,15 +52,15 @@
 					<td colspan="2">
 						<div class="btn-group">
 							<c:if test="${pro.amount>0 && !sid.equals('admin')}">
-								<a href="${path1 }/InsertBasket.do?pro_code=${pro.pro_code}" class="btn btn-warning" role="button">장바구니</a>
+								<a href="${path1 }/InsertCart.do?pro_code=${pro.pro_code}" class="btn btn-warning" role="button">장바구니</a>
 								<a href="${path1 }/InsertSales.do?pro_code=${pro.pro_code}" class="btn btn-danger" role="button">구매</a>
 								<a href="${path1 }/ProductList.do?cate=${pro.cate}" class="btn btn-default" role="button">목록</a>
 							</c:if>
 							<c:if test="${sid.equals('admin') }">
 								<a href="${path1 }/ReceiptProduct.do?pro_code=${pro.pro_code }" class="btn btn-primary" role="button">입고</a>
 								<a href="${path1 }/UpdateProduct.do?pro_code=${pro.pro_code }" class="btn btn-success" role="button">수정</a>
-								<a href="${path1 }/DeleteProduct.do?pro_code=${pro.pro_code }" class="btn btn-danger" role="button">삭제</a>
-								<a href="${path1 }/ProductList.do?cate=${pro.cate}" class="btn btn-default" role="button">목록</a>
+								<a href="${path1 }/DelProduct.do?pro_code=${pro.pro_code }" class="btn btn-danger" role="button">삭제</a>
+								<a href="${path1 }/ProductList.do" class="btn btn-default" role="button">목록</a>
 							</c:if>
 						</div>
 					</td>

@@ -13,8 +13,7 @@ public class Oracle11 {
 	static String PASS = "1234";
 	
 	final static String NOTICE_SELECT_ALL = "select * from notice order by resdate desc";
-/*	select * from notice 기존 명령
-	select * from (select * from notice order by resdate desc) where rownum >= 1 and rownum <= 5;*/
+/*	select * from (select * from notice order by resdate desc) where rownum >= 1 and rownum <= 5;*/
 	final static String NOTICE_SELECT_ONE = "select * from notice where idx=?";
 	final static String NOTICE_READCOUNT_UPDATE = "update notice set readcnt=readcnt+1 where idx=?";
 	final static String INSERT_NOTICE = "insert into notice values (idx.nextval, ?, ?, ?, ?, default, default)";
@@ -36,7 +35,8 @@ public class Oracle11 {
 	final static String PRODUCT_CATE_SELECT = "select * from product where cate=?";
 	final static String PRODUCT_CATE_SELECT2 = "select * from product where cate like ?||'%'";
 	final static String PRODUCT_CATE_SELECT3 = "select * from product where cate like concat(?, '%')";
-	final static String DELETE_PRODUCT = "delete from user1 where pro_code=?";
+	final static String INSERT_PRODUCT = "insert into product(pro_code, pname, pstd, pcost, pcom, amount, pic1, cate) values (?, ?, ?, ?, ?, ?, ?, ?)";
+	final static String DELETE_PRODUCT = "delete from product where pro_code=?";
 	
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(DRIVER);

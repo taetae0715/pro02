@@ -5,3 +5,7 @@
 	<p style="font-weight:bold;">Copyright © 2023 HAPPYDOG. All Rights Reserved.</p>
   </div>
 </footer>
+<!--  <div class="fix_area">
+     <a href="#page5" class="cir_box counsel">고객<br>상담센터</a>
+     <a href="#" class="cir_box totop">↑<br>TOP</a>
+ </div> -->
