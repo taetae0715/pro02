@@ -15,15 +15,14 @@
 .comment { width:auto; height:60px; overflow: hidden;  text-overflow: ellipsis; 
  display: -webkit-box;  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; }
-.thumb_box { width:240px; margin:20px auto; margin-bottom:10px; height:auto; overflow:hidden;
-padding-top:5px; padding-bottom:5px; 
-border:1px solid #e0e0f0; text-align:center; }
+.thumb_box { width:240px; margin:10px auto; height:200px; overflow:hidden; border:1px solid #e0e0f0; text-align:center; }
 .thumb_box::after { content:""; display:block; clear:both; }
-.thumb_box img { width: 240px; height:193px; } 
+.thumb_box img { width: 240px; height:200px; } 
 .sc { color: orange; }
 </style>
 </head>
 <body>
+<div class="page">
 <%@ include file="../../header.jsp" %>
 <div class="content" style="padding-top:30px; margin-top:30px; border-top:3px solid #333; min-height:500px; ">
 	<div class="container-fluid">
@@ -38,7 +37,7 @@ border:1px solid #e0e0f0; text-align:center; }
 						<img src='${path1 }/product/${pro.pic1 }' alt="${pro.pname }"/>
 					</div>
 					<div class="caption">
-						<a href="${path1 }/ProductDetail.do?pro_code=${pro.pro_code}">
+						<a href="${path1 }/ProductDetail.do?pcode=${pro.pcode}">
 							<h3><strong class="sc">${pro.pname }</strong></h3>
 						</a>
 							<p class="comment"><strong>상품 설명</strong> :<br>${pro.pcom }</p>
@@ -46,16 +45,16 @@ border:1px solid #e0e0f0; text-align:center; }
 								<c:if test="${pro.amount<=0 }"><span>품절</span></c:if>
 								<c:if test="${pro.amount>0 }">${pro.amount }</c:if>
 							</p>
-							<p><strong>가격</strong> : <fmt:formatNumber value="${pro.pcost }" type="currency" /></p>
+							<p><strong>가격</strong> : <fmt:formatNumber value="${pro.pprice }" type="currency" /></p>
 						
 						<div class="btn-group">
 							<c:if test="${pro.amount>0 && !sid.equals('admin')}">
-								<a href="${path1 }/InsertBasket.do?pro_code=${pro.pro_code}" class="btn btn-warning" role="button">장바구니 담기</a>
+								<a href="${path1 }/InsertCart.do?pcode=${pro.pcode}" class="btn btn-warning" role="button">장바구니 담기</a>
 							</c:if>
 							<c:if test="${sid.equals('admin') }">
-								<a href="${path1 }/ReceiptProduct.do?pro_code=${pro.pro_code }" class="btn btn-default" role="button">상품 입고</a>
-								<a href="${path1 }/UpdateProduct.do?pro_code=${pro.pro_code }" class="btn btn-default" role="button">상품 수정</a>
-								<a href="${path1 }/DelProduct.do?pro_code=${pro.pro_code }" class="btn btn-danger" role="button">상품 삭제</a>
+								<a href="${path1 }/ReceiptProduct.do?pcode=${pro.pcode }" class="btn btn-default" role="button">상품 입고</a>
+								<a href="${path1 }/UpdateProduct.do?pcode=${pro.pcode }" class="btn btn-default" role="button">상품 수정</a>
+								<a href="${path1 }/DelProduct.do?pcode=${pro.pcode }" class="btn btn-danger" role="button">상품 삭제</a>
 							</c:if>
 						</div>
 					</div>
@@ -70,11 +69,12 @@ border:1px solid #e0e0f0; text-align:center; }
 		</c:if>	
 		<c:if test="${sid.equals('admin') }">
 		<div class="btn-group">
-			<a href="${path1 }/InsertProduct.do" class="btn btn-default">상품 등록</a>
+			<a href="${path1 }/InsertProduct.do" class="btn btn-primary">상품 등록</a>
 		</div>
 		</c:if>
 	</div>
 </div>
 <%@ include file="../../footer.jsp" %>
+</div>
 </body>
 </html>

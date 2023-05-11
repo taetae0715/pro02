@@ -1,21 +1,20 @@
 package com.happydog.dto;
 public class Product {
-	private	int	pro_code;
+	private	String	pcode;
 	private	String	pname;
 	private	String	pstd;
-	private	String	pcost;
+	private	int	pprice;
 	private	String	pcom;
 	private	int	amount;
 	private	String	pic1;
 	private	String	pic2;
 	private	String	pic3;
 	private	String	cate;
-	
-	public int getPro_code() {
-		return pro_code;
+	public String getPcode() {
+		return pcode;
 	}
-	public void setPro_code(int pro_code) {
-		this.pro_code = pro_code;
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
 	public String getPname() {
 		return pname;
@@ -29,11 +28,11 @@ public class Product {
 	public void setPstd(String pstd) {
 		this.pstd = pstd;
 	}
-	public String getPcost() {
-		return pcost;
+	public int getPprice() {
+		return pprice;
 	}
-	public void setPcost(String pcost) {
-		this.pcost = pcost;
+	public void setPprice(int pprice) {
+		this.pprice = pprice;
 	}
 	public String getPcom() {
 		return pcom;
@@ -71,5 +70,4 @@ public class Product {
 	public void setCate(String cate) {
 		this.cate = cate;
 	}
-
 }

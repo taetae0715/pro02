@@ -30,7 +30,7 @@
 				</tr>
 				<tr>
 					<th>상품명(상품코드)</th>
-					<td>${pro.pname }(${pro.pro_code })</td>
+					<td>${pro.pname }(${pro.pcode })</td>
 				</tr>
 				<tr>
 					<th>규격</th>
@@ -42,7 +42,7 @@
 				</tr>
 				<tr>
 					<th>가격</th>
-					<td>${pro.pcost }</td>
+					<td><fmt:formatNumber value="${pro.pprice }" type="currency" /></td>
 				</tr>
 				<tr>
 					<th>남은 수량</th>
@@ -52,15 +52,14 @@
 					<td colspan="2">
 						<div class="btn-group">
 							<c:if test="${pro.amount>0 && !sid.equals('admin')}">
-								<a href="${path1 }/InsertCart.do?pro_code=${pro.pro_code}" class="btn btn-warning" role="button">장바구니</a>
-								<a href="${path1 }/InsertSales.do?pro_code=${pro.pro_code}" class="btn btn-danger" role="button">구매</a>
+								<a href="${path1 }/InsertCart.do?pcode=${pro.pcode}" class="btn btn-warning" role="button">장바구니</a>
+								<a href="${path1 }/InsertSales.do?pcode=${pro.pcode}" class="btn btn-danger" role="button">구매</a>
 								<a href="${path1 }/ProductList.do?cate=${pro.cate}" class="btn btn-default" role="button">목록</a>
 							</c:if>
 							<c:if test="${sid.equals('admin') }">
-								<a href="${path1 }/ReceiptProduct.do?pro_code=${pro.pro_code }" class="btn btn-primary" role="button">입고</a>
-								<a href="${path1 }/UpdateProduct.do?pro_code=${pro.pro_code }" class="btn btn-success" role="button">수정</a>
-								<a href="${path1 }/DelProduct.do?pro_code=${pro.pro_code }" class="btn btn-danger" role="button">삭제</a>
-								<a href="${path1 }/ProductList.do" class="btn btn-default" role="button">목록</a>
+								<a href="${path1 }/ReceiptProduct.do?pcode=${pro.pcode }" class="btn btn-warning" role="button">상품 입고</a>
+								<a href="${path1 }/UpdateProduct.do?pcode=${pro.pcode }" class="btn btn-success" role="button">상품 수정</a>
+								<a href="${path1 }/DelProduct.do?pcode=${pro.pcode }" class="btn btn-danger" role="button">상품 삭제</a>
 							</c:if>
 						</div>
 					</td>
@@ -69,7 +68,8 @@
 		</table>
 		<c:if test="${sid.equals('admin') }">
 		<div class="btn-group">
-			<a href="${path1 }/InsertProduct.do" class="btn btn-default">상품 등록</a>
+			<a href="${path1 }/InsertProduct.do" class="btn btn-primary">상품 등록</a>
+			<a href="${path1 }/ProductList.do" class="btn btn-default" role="button">상품 목록</a>
 		</div>
 		</c:if>
 	</div>

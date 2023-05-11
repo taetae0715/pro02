@@ -8,6 +8,9 @@
 <html>
 <head>
 <%@ include file="../../common.jsp" %>
+<script src="${path1 }../../jquery-1.10.1.min.js"></script>
+<script src="${path1 }../../datatables.min.js"></script>
+<link rel="stylesheet" href="${path1 }../../datatables.min.css">
 <title>공지사항</title>
 <style>
 .container-fluid { width:1280px; }
@@ -42,14 +45,14 @@
 				</c:if>	
 			</tbody>
 		</table>
-		<div class="btn-group">
-			<a href="${path1 }/InsertNotice.do" class="btn btn-primary">글 등록</a>
-		</div>
 		<script>
 			$(document).ready(function(){
 			    $('#tb1').DataTable({'order': [[0, 'asc']]});
 			});
 		</script>
+		<div class="btn-group">
+			<a href="${path1 }/InsertNotice.do" class="btn btn-primary">글 등록</a>
+		</div>
 	</div>
 </div>
 <%@ include file="../../footer.jsp" %>

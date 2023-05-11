@@ -1,15 +1,14 @@
 package com.happydog.dto;
 public class Cart {
-	private	int	cart_no;
-	private	String	id;
-	private	int	pro_code;
-	private	int	amountt;
-	
-	public int getCart_no() {
-		return cart_no;
+	private	String cno;
+	private	String id;
+	private	String pcode;
+	private	int	amount;
+	public String getCno() {
+		return cno;
 	}
-	public void setCart_no(int cart_no) {
-		this.cart_no = cart_no;
+	public void setCno(String cno) {
+		this.cno = cno;
 	}
 	public String getId() {
 		return id;
@@ -17,19 +16,16 @@ public class Cart {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getPro_code() {
-		return pro_code;
+	public String getPcode() {
+		return pcode;
 	}
-	public void setPro_code(int pro_code) {
-		this.pro_code = pro_code;
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
-
-	public int getAmountt() {
-		return amountt;
+	public int getAmount() {
+		return amount;
 	}
-	public void setAmountt(int amountt) {
-		this.amountt = amountt;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
-	
-	
 }

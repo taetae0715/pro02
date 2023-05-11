@@ -1,5 +1,6 @@
 package com.happydog.controller.product;
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -24,50 +25,63 @@ public class InsertProductProCtrl extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String savePath = "/data";	
+		String savePath = "/product/img";	
 		int uploadFileSizeLimit = 10 * 1024 * 1024;	
 		String encType = "UTF-8";		
 		ServletContext context = getServletContext();	
 		String uploadFilePath = context.getRealPath(savePath);  
+		System.out.println("지정된 업로드 디렉토리 : "+savePath);
+		System.out.println("서버 상의 실제 업로드되는 디렉토리 : "+uploadFilePath);
 		
-		int pro_code = 0;
-		String pname = "";
-		String pstd = "";
-		String pcost = "";
-		String pcom = "";
-		int amount = 0;
-		String fileName = "";
-		String cate = "";
-
+		int n = 0;
+		String[] fileName = new String[3];
+		String[] oriFileName = new String[3];
 		ProductDAO dao = new ProductDAO();
 		Product pro = new Product();
 		
-		//pro_code, pname, pstd, pcost, pcom, amount, pic1, cate
-		try { MultipartRequest multi = new MultipartRequest(request, uploadFilePath, 
+		try { 
+			MultipartRequest multi = new MultipartRequest(request, uploadFilePath, 
 					uploadFileSizeLimit, encType, new DefaultFileRenamePolicy());
-			fileName = multi.getFilesystemName("pic1");
-			if (fileName == null) { System.out.print("첨부 파일 없음"); } 
-			else { pro.setPic1("data/"+fileName); }
-			pro_code = Integer.parseInt(multi.getParameter("pro_code"));
-			pname = multi.getParameter("pname");
-			pstd = multi.getParameter("pstd");
-			pcost = multi.getParameter("pcost");
-			pcom = multi.getParameter("pcom");
-			amount = Integer.parseInt(multi.getParameter("amount"));
-			cate = multi.getParameter("cate");
-		} catch (Exception e) { System.out.print("예외 발생 : " + e); }
-		
-		pro.setPro_code(pro_code);
-		pro.setPname(pname);
-		pro.setPstd(pstd);
-		pro.setPcost(pcost);
-		pro.setPcom(pcom);
-		pro.setAmount(amount);
-		pro.setCate(cate);
-		
+			Enumeration<?> files = multi.getFileNames();
+			while(files.hasMoreElements()) {
+				String file = (String) files.nextElement();
+				fileName[n] = multi.getFilesystemName(file);
+				//중복된 파일을 업로드할 경우 파일명이 바뀐다.
+				oriFileName[n] = multi.getOriginalFileName(file);
+				n++;
+			}
+			
+			if (fileName[0] == null) { // 파일이 업로드 되지 않았을때
+				System.out.print("파일1 업로드 실패");
+			} else {
+				pro.setPic1("img/"+fileName[0]);
+			}
+			
+			if (fileName[1] == null) { // 파일이 업로드 되지 않았을때
+				System.out.print("파일2 업로드 실패");
+			} else {
+				pro.setPic2("img/"+fileName[1]);
+			}
+
+			if (fileName[2] == null) { // 파일이 업로드 되지 않았을때
+				System.out.print("파일3 업로드 실패");
+			} else {
+				pro.setPic3("img/"+fileName[2]);
+			}
+			pro.setPcode(multi.getParameter("pcode"));
+			pro.setPname(multi.getParameter("pname"));
+			pro.setPstd(multi.getParameter("pstd"));
+			pro.setPprice(Integer.parseInt(multi.getParameter("pprice")));
+			pro.setPcom(multi.getParameter("pcom"));
+			pro.setAmount(Integer.parseInt(multi.getParameter("amount")));
+			pro.setCate(multi.getParameter("cate"));
+		} catch (Exception e) {
+			System.out.print("예외 발생 : " + e);
+		}
+
 		int cnt = dao.insertProduct(pro);	
 		if(cnt==0){ String msg = "상품이 등록되지 못했습니다."; request.setAttribute("msg", msg);
-			RequestDispatcher view = request.getRequestDispatcher("/product/insertProduct.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("InsertProduct.do");
 			view.forward(request, response); } 
 		else { response.sendRedirect("ProductList.do"); }
 	}

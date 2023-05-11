@@ -18,13 +18,13 @@ public class DelProductCtrl extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		int pro_code = Integer.parseInt(request.getParameter("pro_code"));
-		ProductDAO ndao = new ProductDAO();
+		String pcode = request.getParameter("pcode");
+		ProductDAO dao = new ProductDAO();
 		
-		int cnt = ndao.deleteProduct(pro_code);
+		int cnt = dao.deleteProduct(pcode);
 		if(cnt==0){ String msg = "상품을 삭제하지 못했습니다.";
 			request.setAttribute("msg", msg);
-			response.sendRedirect("ProductDetail.do?pro_code="+pro_code);
+			response.sendRedirect("ProductDetail.do?pcode="+pcode);
 		} else { response.sendRedirect("ProductList.do"); }
 	}
 }

@@ -14,7 +14,7 @@
 <meta name="author" content="ms. jo">
 
 <!-- 파비콘(favicon) 설정 -->
-<link rel="shortcut icon" href="${common_path }/img/favicon.ico">
+<link rel="shortcut icon" href="${common_path }/img/favicon.ico2">
 
 <!-- https://taetae0715.github.io/web1 -->
 <!-- 오픈그래프 설정 -->
@@ -34,6 +34,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script src="${common_path }/jquery-1.10.1.min.js"></script>
+<script src="${common_path }/datatables.min.js"></script>
+<link rel="stylesheet" href="${common_path }/datatables.min.css">
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
