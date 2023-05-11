@@ -4,6 +4,7 @@ import java.util.Date;
 public class User {
 	private String id;
 	private String pw;
+	private String hpw;
 	private String name;
 	private String tel;
 	private String addr;
@@ -31,4 +32,11 @@ public class User {
 	public void setPoint(int point) { this.point = point; }
 	public int getVisited() { return visited; }
 	public void setVisited(int visited) { this.visited = visited; }
+	public String getHpw() {
+		return hpw;
+	}
+	public void setHpw(String hpw) {
+		this.hpw = hpw;
+	}
+	
 }

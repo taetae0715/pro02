@@ -24,6 +24,7 @@ public class UserDAO {
 	String key = "%03x";
 	String qpw;
 
+	//로그인 실행
 	public int loginCheck(String id, String pw) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidParameterSpecException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException{
 		userVisitedCount(id);
 		int cnt = 0;
@@ -43,6 +44,7 @@ public class UserDAO {
 		} finally { Oracle11.close(rs, pstmt, con); }
 		return cnt; }
 	
+	//이건 아마도 방문회수 세려고?
 	public int loginPass(String id, String pw) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidParameterSpecException, UnsupportedEncodingException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException{
 		int cnt = 0;
 		try {
@@ -61,6 +63,7 @@ public class UserDAO {
 		} finally { Oracle11.close(rs, pstmt, con); }
 		return cnt; }
 	
+	//아이디 중복 확인
 	public int idCheck(String id) {
 		int cnt = 0;
 		try {
@@ -128,6 +131,7 @@ public class UserDAO {
 					hpw+="*";
 				}
 				user.setPw(vpw+hpw);
+				user.setHpw(qpw);
 				user.setName(rs.getString("name"));
 				user.setTel(rs.getString("tel"));
 				user.setEmail(rs.getString("email"));
@@ -146,6 +150,7 @@ public class UserDAO {
 		return user;
 	}
 	
+	//비번 바꿈
 	public int updateUser(User user){
 		int cnt = 0;
 		try {
@@ -168,6 +173,7 @@ public class UserDAO {
 		return cnt;
 	}
 	
+	//비번 안 바꿈
 	public int updateUser2(User user){
 		int cnt = 0;
 		try {
@@ -207,6 +213,43 @@ public class UserDAO {
 		return cnt;
 	}
 	
+	//관리자용 회원 목록
+	public ArrayList<User> getUserList() throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException{
+		ArrayList<User> userList = new ArrayList<User>();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.USER_SELECT_ALL);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				User user = new User();
+				user.setId(rs.getString("id"));
+				qpw = AES256.decryptAES256(rs.getString("pw"), key);
+				int k = qpw.length();	//암호 글자수 세기
+				String vpw = qpw.substring(0, 3);	//3글자만 암호를 보여주기
+				String hpw = "";
+				for(int i=0;i<k-3;i++){	//나머지는 *로 넣기
+					hpw+="*";
+				}
+				user.setPw(vpw+hpw);
+				user.setHpw(qpw);
+				user.setName(rs.getString("name"));
+				user.setTel(rs.getString("tel"));
+				user.setEmail(rs.getString("email"));
+				user.setRegdate(rs.getString("regdate"));
+				user.setAddr(rs.getString("addr"));
+				user.setPoint(rs.getInt("point"));
+				user.setVisited(rs.getInt("visited"));
+				userList.add(user);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return userList; 
+	}
 	public ArrayList<User> userList() throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException{
 		ArrayList<User> uList = new ArrayList<User>();
 		try {
@@ -241,5 +284,50 @@ public class UserDAO {
 			Oracle11.close(rs, pstmt, con);
 		}
 		return uList;
+	}
+	
+	public User getTel(String id) {
+		User user = new User();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.USER_LOGIN);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				user.setId(rs.getString("id"));
+				user.setName(rs.getString("name"));
+				user.setTel(rs.getString("tel"));
+				user.setEmail(rs.getString("email"));
+				user.setRegdate(rs.getString("regdate"));
+				user.setAddr(rs.getString("addr"));
+				user.setPoint(rs.getInt("point"));
+				user.setVisited(rs.getInt("visited"));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return user;
+	}
+
+	public int resetPassword(String id, String passwd) {
+		int cnt = 0;
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.UPDATE_PW_RESET);
+			pstmt.setString(1, passwd);
+			pstmt.setString(2, id);
+			cnt = pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(pstmt, con);
+		}
+		return cnt;
 	}
 }

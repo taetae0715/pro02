@@ -22,7 +22,7 @@ public class Oracle11 {
 	final static String DELETE_NOTICE = "delete from notice where idx=?";
 	
 	//회원 user
-	final static String USER_SELECT_ALL = "select * from user order by regdate desc";
+	final static String USER_SELECT_ALL = "select * from user1 order by regdate desc";
 	final static String USER_LOGIN =  "select * from user1 where id=?";
 	final static String USER_VISIT_COUNT =  "update user1 set visited=visited+1 where id=?";
 	final static String INSET_USER = "insert into user1(id, pw, name, tel, addr, email) values (?,?,?,?,?,?)";
@@ -36,6 +36,7 @@ public class Oracle11 {
 	final static String PRODUCT_CATENAME_SELECT = "select * from category where cate=?";
 	final static String PRODUCT_SELECT_ALL = "select * from product order by cate desc";
 	final static String PRODUCT_SELECT_ONE = "select * from product where pcode=?";
+	final static String PRODUCT_SOLDOUT_SELECT = "select * from product where amount<=0";
 	final static String PRODUCT_CATE_SELECT = "select * from product where cate=?";
 	final static String PRODUCT_CATE_SELECT2 = "select * from product where cate like ?||'%'";
 	final static String PRODUCT_CATE_SELECT3 = "select * from product where cate like concat(?, '%')";
@@ -47,12 +48,22 @@ public class Oracle11 {
 	final static String INSERT_PRODUCT = "insert into product values(?,?,?,?,?,?,?,?,?,?)";
 	final static String RECEIPT_PRODUCT = "update product set amount=amount+?, pprice=? where pcode=?";
 	final static String UPDATE_PRODUCT = "update product set amount=amount+?, pprice=? where pcode=?";
-	final static String UPDATE_PRODUCT2 = "update product set pname=?, pstd=?, pprice=?, pcom=?, amount=?, pic1=?, pic2=?, pic3=?, utburl=?, bookidx=?, cate=? where pcode=?";
+	final static String UPDATE_PRODUCT2 = "update product set pname=?, pstd=?, pprice=?, pcom=?, amount=?, pic1=?, pic2=?, pic3=?, cate=? where pcode=?";
 	final static String SALES_PRODUCT = "update product set amount=amount-? where pcode=?";
 	final static String DELETE_PRODUCT = "delete from product where pcode=?";
 	
 	//장바구니 cart
+	final static String CART_SELECT_ALL = "select * from cart order by cno desc";
+	final static String CART_SELECT_ALL2 = "select cart.cno as cno, cart.id as id, user1.name as name, cart.pcode as pcode, product.pname as pname, cart.amount as amount, product.pprice as pprice from cart, user1, product where cart.id=user1.id and cart.pcode=product.pcode";
+	final static String CART_SELECT_BYID = "select * from basket where id=?";
+	final static String CART_SELECT_BYID2 = "select cart.cno as cno, cart.id as id, user1.name as name, cart.pcode as pcode, product.pname as pname, cart.amount as amount, product.pprice as pprice from cart, user1, product where cart.id=user1.id and cart.pcode=product.pcode and cart.id=?";
+	final static String CART_SELECT_BYPRODUCT = "select * from cart where pcode=?";
+	final static String CART_SELECT_BYCNO = "select * from cart where cno=?";
+	final static String INSERT_CART = "insert into cart values (?,?,?,?)";
+	final static String DEL_CART = "delete from cart where cno=?";
+	final static String CNO_GENERATOR = "select cno from (select cno from cart order by cno desc) where rownum = 1";
 	
+	//DB 연결
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(DRIVER);
 		Connection conn = DriverManager.getConnection(URL, USER, PASS);

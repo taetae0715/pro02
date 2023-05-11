@@ -107,6 +107,67 @@ public class ProductDAO {
 		}
 		return proList; }
 	
+	//관리자용 카테고리별 제품목록 로딩
+	public ArrayList<Product> getAdminCateProductList(String cate){
+		ArrayList<Product> proList = new ArrayList<Product>();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.PRODUCT_CATE_SELECT2);
+			pstmt.setString(1, cate);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Product pro = new Product();
+				pro.setPcode(rs.getString("pcode"));
+				pro.setPname(rs.getString("pname"));
+				pro.setPstd(rs.getString("pstd"));
+				pro.setPprice(rs.getInt("pprice"));
+				pro.setPcom(rs.getString("pcom"));
+				pro.setAmount(rs.getInt("amount"));
+				pro.setPic1(rs.getString("pic1"));
+				pro.setPic2(rs.getString("pic2"));
+				pro.setPic3(rs.getString("pic3"));
+				pro.setCate(rs.getString("cate"));
+				proList.add(pro);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return proList; }
+	
+	//관리자용 품절 상품 목록 불러오기
+	public ArrayList<Product> getSoldoutProductList() {
+		ArrayList<Product> proList = new ArrayList<Product>();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.PRODUCT_SOLDOUT_SELECT);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Product pro = new Product();
+				pro.setPcode(rs.getString("pcode"));
+				pro.setPname(rs.getString("pname"));
+				pro.setPstd(rs.getString("pstd"));
+				pro.setPprice(rs.getInt("pprice"));
+				pro.setPcom(rs.getString("pcom"));
+				pro.setAmount(rs.getInt("amount"));
+				pro.setPic1(rs.getString("pic1"));
+				pro.setPic2(rs.getString("pic2"));
+				pro.setPic3(rs.getString("pic3"));
+				pro.setCate(rs.getString("cate"));
+				proList.add(pro);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return proList; }
+
 	//카테고리 로딩
 	public HashMap<String, String> getCategory(String cate){
 		HashMap<String, String> cateMap = new HashMap<String, String>();
@@ -261,6 +322,29 @@ public class ProductDAO {
 		return cnt;
 	}
 	
+	//상품 수정
+	public int updateProduct(Product pro){
+		int cnt = 0;
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.UPDATE_PRODUCT2);
+			pstmt.setString(1, pro.getPname());
+			pstmt.setString(2, pro.getPstd());
+			pstmt.setInt(3, pro.getPprice());
+			pstmt.setString(4, pro.getPcom());
+			pstmt.setInt(5, pro.getAmount());
+			pstmt.setString(6, pro.getPic1());
+			pstmt.setString(7, pro.getPic2());
+			pstmt.setString(8, pro.getPic3());
+			pstmt.setString(9, pro.getCate());
+			pstmt.setString(10, pro.getPcode());
+			cnt = pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) { e.printStackTrace();
+		} catch (SQLException e){ e.printStackTrace();			
+		} catch (Exception e){ e.printStackTrace(); }
+		Oracle11.close(pstmt, con);
+		return cnt; }
+	
 	//상품 삭제
 	public int deleteProduct(String pcode) {
 		int cnt = 0;
@@ -278,11 +362,25 @@ public class ProductDAO {
 		}
 		Oracle11.close(pstmt, con);
 		return cnt; }
-
-	public ArrayList<Product> getAdminCateProductList(String cate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
+	//상품 판매
+	public int salesProduct(String pcode, int amount){
+		int cnt =0 ;
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.SALES_PRODUCT);
+			pstmt.setInt(1, amount);
+			pstmt.setString(2, pcode);
+			cnt = pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) { //오라클 JDBC 클래스가 없거나 경로가 다른 경우 발생
+			e.printStackTrace();
+		} catch (SQLException e){	//sql 구문이 틀린 경우 발생
+			e.printStackTrace();			
+		} catch (Exception e){	//알 수 없는 예외인 경우 발생
+			e.printStackTrace();
+		}
+		Oracle11.close(pstmt, con);
+		return cnt;
+	}
 	
 }

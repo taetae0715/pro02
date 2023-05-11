@@ -16,12 +16,12 @@
 				</c:if>
 				<c:if test="${!empty sid }">
 					<li><a href="${path }/MyPage.do">${sid }님의 마이페이지</a></li>
-					<li><a href="${path }/MyCart.do">장바구니</a></li>
+					<li><a href="${path }/MyCart.do?id=${sid }">장바구니</a></li>
 					<li><a href="${path }/UserLogout.do">로그아웃</a></li>
 				</c:if>
-				<c:if test="${sid=='admin' }">
+<%-- 				<c:if test="${sid=='admin' }">
 					<li><a href="${path }/Admin.do">관리자 페이지</a></li>
-				</c:if>
+				</c:if> --%>
 			</ul>
 		</nav>
 	</div>
@@ -110,11 +110,11 @@
 		          <ul class="dropdown-menu" role="menu">
 		         	<li><a href="${path }/NoticeList.do">공지사항</a></li>
 		            <li class="divider"></li>
-		            <li><a href="#">FAQ</a></li>
-		            <li><a href="#">QNA</a></li>
+		            <li><a href="${path1 }/FaqList.do">FAQ</a></li>
+		            <li><a href="${path1 }/QnaList.do">QNA</a></li>
 		            <li class="divider"></li>
-		            <li><a href="#">고객 후기</a></li>
-		            <li><a href="#">홍보/이벤트</a></li>
+		            <li><a href="${path1 }/ReviewList.do">고객 후기</a></li>
+		            <li><a href="${path1 }/EventList.do">홍보/이벤트</a></li>
 		          </ul>
 		        </li>
 		      </ul>

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.happydog.dto.Product;
 import com.happydog.model.ProductDAO;
 
-@WebServlet("/AdminCategoryList.do")
-public class AdminCateProductListCtrl extends HttpServlet {
+@WebServlet("/SoldoutProductList.do")
+public class SoldoutProductListCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,18 +24,18 @@ public class AdminCateProductListCtrl extends HttpServlet {
 		ArrayList<Product> proList = new ArrayList<Product>();
 		HashMap<String, String> cateMap = new HashMap<String, String>();
 		if(cate==null){
-			proList = dao.getProductList();
+			proList = dao.getSoldoutProductList();
 			cate = "0101";
-			cateMap.put("catename", "전체");
+			cateMap.put("catename", "품절");
 		} else {
-			proList = dao.getAdminCateProductList(cate);
+			proList = dao.getCateProductList(cate);
 			cateMap = dao.getCategory(cate);
 		}
 		
 		request.setAttribute("proList", proList);
 		request.setAttribute("cateMap", cateMap);
 		
-		//RequestDispatcher(디스패치)로 view를 생성하여 proList.jsp로 요청받은proList를 포워드 
+		//디스패치로 view를 생성하여 proList.jsp로 요청 받은 proList를 포워드
 		RequestDispatcher view = request.getRequestDispatcher("/product/proList.jsp");
 		view.forward(request, response);
 	}

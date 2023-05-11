@@ -4,6 +4,7 @@ public class Cart {
 	private	String id;
 	private	String pcode;
 	private	int	amount;
+	
 	public String getCno() {
 		return cno;
 	}
