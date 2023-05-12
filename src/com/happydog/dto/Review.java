@@ -1,47 +1,65 @@
 package com.happydog.dto;
+
+import java.util.Date;
+
 public class Review {
-	private	int	review_no;
+	private	int	rcode;
 	private	String	id;
-	private	int	order_no;
-	private	String	reg_date;
-	private	String	review;
-	private	int	rank;
+	private	String	pcode;
+	private	String	resdate;
+	private	String	rcontent;
+	private	String	rpoint;
 	
-	public int getReview_no() {
-		return review_no;
+	public Review(){
+		Date now = new Date();
+		this.resdate = now.toString();
 	}
-	public void setReview_no(int review_no) {
-		this.review_no = review_no;
+
+	public int getRcode() {
+		return rcode;
 	}
+
+	public void setRcode(int rcode) {
+		this.rcode = rcode;
+	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getOrder_no() {
-		return order_no;
+
+	public String getPcode() {
+		return pcode;
 	}
-	public void setOrder_no(int order_no) {
-		this.order_no = order_no;
+
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
-	public String getReg_date() {
-		return reg_date;
+
+	public String getResdate() {
+		return resdate;
 	}
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
+
+	public void setResdate(String resdate) {
+		this.resdate = resdate;
 	}
-	public String getReview() {
-		return review;
+
+	public String getRcontent() {
+		return rcontent;
 	}
-	public void setReview(String review) {
-		this.review = review;
+
+	public void setRcontent(String rcontent) {
+		this.rcontent = rcontent;
 	}
-	public int getRank() {
-		return rank;
+
+	public String getRpoint() {
+		return rpoint;
 	}
-	public void setRank(int rank) {
-		this.rank = rank;
+
+	public void setRpoint(String rpoint) {
+		this.rpoint = rpoint;
 	}
-	
 }

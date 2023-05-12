@@ -53,7 +53,7 @@
 						<div class="btn-group">
 							<c:if test="${pro.amount>0 && !sid.equals('admin')}">
 								<a href="${path1 }/InsertCart.do?pcode=${pro.pcode}" class="btn btn-warning" role="button">장바구니</a>
-								<a href="${path1 }/InsertSales.do?pcode=${pro.pcode}" class="btn btn-danger" role="button">구매</a>
+								<a href="${path1 }/AddSales.do?pcode=${pro.pcode}&id=${sid }" class="btn btn-danger" role="button">구매하기</a>
 								<a href="${path1 }/ProductList.do?cate=${pro.cate}" class="btn btn-default" role="button">목록</a>
 							</c:if>
 							<c:if test="${sid.equals('admin') }">

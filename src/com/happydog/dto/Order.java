@@ -2,9 +2,9 @@ package com.happydog.dto;
 import java.util.Date;
 
 public class Order {
-	private	int	order_no;
+	private	int	ocode;
 	private	String	id;
-	private	int	pro_code;
+	private	String	pcode;
 	private	int	amount = 1;
 	private	String	price;
 	private	String	odate;
@@ -19,12 +19,12 @@ public class Order {
 		this.odate = now.toString();
 	}
 
-	public int getOrder_no() {
-		return order_no;
+	public int getOcode() {
+		return ocode;
 	}
 
-	public void setOrder_no(int order_no) {
-		this.order_no = order_no;
+	public void setOcode(int ocode) {
+		this.ocode = ocode;
 	}
 
 	public String getId() {
@@ -35,12 +35,12 @@ public class Order {
 		this.id = id;
 	}
 
-	public int getPro_code() {
-		return pro_code;
+	public String getPcode() {
+		return pcode;
 	}
 
-	public void setPro_code(int pro_code) {
-		this.pro_code = pro_code;
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
 
 	public int getAmount() {
@@ -106,7 +106,5 @@ public class Order {
 	public void setDcode(String dcode) {
 		this.dcode = dcode;
 	}
-
 	
-
 }

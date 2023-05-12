@@ -60,7 +60,7 @@
 					<tr>
 						<th><label for="amount">수량</label></th>
 						<td>
-							<input type="number" name="amount" id="amount" value="${pro.amount }" min="1" max="500" title="1~500" class="form-control">
+							<input type="number" name="amount" id="amount" value="${pro.amount }" min="0" max="500" title="1~500" class="form-control">
 						</td>
 					</tr>
 					<tr>

@@ -50,7 +50,7 @@ public class InsertProductProCtrl extends HttpServlet {
 				oriFileName[n] = multi.getOriginalFileName(file);
 				n++;
 			}
-			
+			System.out.println(fileName[0]);
 			if (fileName[0] == null) { // 파일이 업로드 되지 않았을때
 				System.out.print("파일1 업로드 실패");
 			} else {

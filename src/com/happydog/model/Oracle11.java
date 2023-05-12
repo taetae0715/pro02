@@ -33,7 +33,7 @@ public class Oracle11 {
 	final static String UPDATE_PW_RESET = "update user1 set pw=? where id=?";
 	
 	//상품 product
-	final static String PRODUCT_CATENAME_SELECT = "select * from category where cate=?";
+	final static String PRODUCT_CATENAME_SELECT = "select * from category where cate like ?||'%'";
 	final static String PRODUCT_SELECT_ALL = "select * from product order by cate desc";
 	final static String PRODUCT_SELECT_ONE = "select * from product where pcode=?";
 	final static String PRODUCT_SOLDOUT_SELECT = "select * from product where amount<=0";
@@ -62,6 +62,13 @@ public class Oracle11 {
 	final static String INSERT_CART = "insert into cart values (?,?,?,?)";
 	final static String DEL_CART = "delete from cart where cno=?";
 	final static String CNO_GENERATOR = "select cno from (select cno from cart order by cno desc) where rownum = 1";
+	
+	//판매 sales
+	/*final static String OCODE_GENERATOR = "select ocode from (select * from buy order by ocode desc) where rownum = 1";
+	final static String PNNO_GENERATOR = "select pnum from (select * from payment order by pnum desc) where rownum = 1";*/
+	final static String ADD_SALES = "insert into order1 values (ocode.nextval,?,?,?,?,default,?,?,?,?,?)";
+	final static String ADD_PAY = "insert into pay values (pno.nextval,?,?,?,?,?,default)";
+	final static String BUY_TRANS_CART = "delete from cart where cno=?";
 	
 	//DB 연결
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {

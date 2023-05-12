@@ -23,6 +23,7 @@ public class AdminCateProductListCtrl extends HttpServlet {
 		ProductDAO dao = new ProductDAO();
 		ArrayList<Product> proList = new ArrayList<Product>();
 		HashMap<String, String> cateMap = new HashMap<String, String>();
+		cateMap = dao.getCategory(cate);
 		if(cate==null){
 			proList = dao.getProductList();
 			cate = "0101";
@@ -31,10 +32,9 @@ public class AdminCateProductListCtrl extends HttpServlet {
 			proList = dao.getAdminCateProductList(cate);
 			cateMap = dao.getCategory(cate);
 		}
-		
 		request.setAttribute("proList", proList);
 		request.setAttribute("cateMap", cateMap);
-		
+
 		//RequestDispatcher(디스패치)로 view를 생성하여 proList.jsp로 요청받은proList를 포워드 
 		RequestDispatcher view = request.getRequestDispatcher("/product/proList.jsp");
 		view.forward(request, response);

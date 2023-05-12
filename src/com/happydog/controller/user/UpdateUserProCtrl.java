@@ -33,17 +33,25 @@ public class UpdateUserProCtrl extends HttpServlet {
 		String id = request.getParameter("id");
 		String hpw = request.getParameter("hpw");
 		String pw = request.getParameter("pw");
+		String ppw = request.getParameter("ppw");
+		
 		String passwd = "";
-		if(pw!=hpw){
+		if(ppw!=null){
 			try {
-				passwd = AES256.encryptAES256(pw, key);
+				passwd = AES256.encryptAES256(ppw, key);
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| InvalidKeySpecException | NoSuchPaddingException
 					| InvalidParameterSpecException | BadPaddingException
 					| IllegalBlockSizeException e) {
-				e.printStackTrace();
-			}
-		}
+				e.printStackTrace(); }
+		} else {
+			try {
+				passwd = AES256.encryptAES256(hpw, key);
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| InvalidKeySpecException | NoSuchPaddingException
+					| InvalidParameterSpecException | BadPaddingException
+					| IllegalBlockSizeException e) {
+				e.printStackTrace(); } }
 		user.setId(request.getParameter("id"));
 		user.setPw(passwd);
 		user.setName(request.getParameter("name"));

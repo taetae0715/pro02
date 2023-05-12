@@ -40,3 +40,38 @@ insert into cart values('1005',	'smj',	'01030002',	4);
 insert into cart values('1006',	'jws',	'01020002',	3);
 insert into cart values('1007',	'jws',	'01020001',	2);
 commit;
+
+select * from order1, pay;
+select * from order1;
+desc order1;
+desc pay;
+select * from pay;
+delete pay;
+delete order1;
+create sequence ocode start with 1 increment by 1;
+create sequence pno start with 1 increment by 1;
+insert into order1 VALUES (OCODE.nextval, 'kmm',	'01030001', 2, '11000', '2023-04-21', '배송완료',	 '010-4321-4321', 'CJ대한통운', '김포시 양촌읍', 'f828279');
+insert into order1 VALUES (OCODE.nextval, 'jtj',	'01020002', 3, '18600', '2023-04-22', '배송완료',	 '010-9864-2514', '우체국', '고양시 덕양구', 'c456789');
+insert into order1 VALUES (OCODE.nextval, 'ysr',	'01030002', 2, '23800', '2023-04-23', '배송중',	 '010-8163-0000', '우체국', '인천시 부평구', 'h125663');
+insert into order1 VALUES (OCODE.nextval, 'smj',	'01050001', 4, '36000', '2023-04-24', '배송준비중',	 '010-7979-8282', null, '서울시 은평구', null);
+
+insert into pay VALUES (pno.nextval,	'kmm',	5,	'신용카드',	'123-1234-123456',	11000,	'2023-04-21');
+insert into pay VALUES (pno.nextval,	'jtj',	6,	'계좌이체',	'044-33-556677',	18600,	'2023-04-22');
+insert into pay VALUES (pno.nextval,	'ysr',	7,	'체크카드',	'333-7894-5611',	23800,	'2023-04-23');
+insert into pay VALUES (pno.nextval,	'smj',	8,	'신용카드',	'2233-4545-666',	36000,	'2023-04-24');
+commit;
+
+select * from product where cate like '01%';
+select * from review;
+create sequence rcode start with 1 increment by 1;
+delete review;
+select * from pay;
+select * from order1;
+insert into review values (RCODE.nextval, 'kmm', '', '2023-04-22', '고소하고 맛있어요.', '5점');
+insert into review values (RCODE.nextval, 'jtj', '01020002', '2023-04-24', '강아지가 잘 먹어요.', '4.5점');
+update review set pcode='01030001' where id='kmm';
+commit;
+
+select * from product where cate like ?||'%';
+select * from product where cate like '01'||'%';
+select * from category where cate like '01'||'%';

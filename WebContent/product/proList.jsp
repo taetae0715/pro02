@@ -8,6 +8,7 @@
 <html>
 <head>
 <%@ include file="../../common.jsp" %>
+<link rel="shortcut icon" href="${path1 }/img/favicon2.ico">
 <title>상품 목록</title>
 <style>
 .container-fluid { width:1280px; }
@@ -27,7 +28,18 @@
 <div class="content" style="padding-top:30px; margin-top:30px; border-top:3px solid #333; min-height:500px; ">
 	<div class="container-fluid">
 		<h2>상품 - ${cateMap.catename } 목록</h2>
-		<br><hr><br>
+		<c:if test="${sid.equals('admin') }">
+			<div class="btn-group">
+				<a href="${path1 }/AdminCategoryList.do?cate=01" role="button" class="btn btn-default">[01]수제간식</a>
+				<a href="${path1 }/AdminCategoryList.do?cate=02" role="button" class="btn btn-default">[02]강아지용품</a>
+				<a href="${path1 }/AdminCategoryList.do?cate=03" role="button" class="btn btn-default">[03]고양이용품 </a>
+				<a href="${path1 }/AdminCategoryList.do?cate=04" role="button" class="btn btn-default">[04]관상어용품</a>
+				<a href="${path1 }/AdminCategoryList.do?cate=05" role="button" class="btn btn-default">[05]기타동물용품</a>
+				<a href="${path1 }/SoldoutProductList.do" role="button" class="btn btn-danger">품절 상품</a>
+				<a href="${path1 }/AdminProductList.do" role="button" class="btn btn-warning">상품 목록</a>
+			</div>
+			<hr>
+		</c:if>
 		<fmt:setLocale value="ko_kr" />
 		<article class="row">
 			<c:forEach var="pro" items="${proList }" varStatus="status">
@@ -46,7 +58,6 @@
 								<c:if test="${pro.amount>0 }">${pro.amount }</c:if>
 							</p>
 							<p><strong>가격</strong> : <fmt:formatNumber value="${pro.pprice }" type="currency" /></p>
-						
 						<div class="btn-group">
 							<c:if test="${pro.amount>0 && !sid.equals('admin')}">
 								<a href="${path1 }/InsertCart.do?pcode=${pro.pcode}" class="btn btn-warning" role="button">장바구니 담기</a>

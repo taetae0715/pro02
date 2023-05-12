@@ -17,7 +17,12 @@
 <%@ include file="../../header.jsp" %>
 <div class="content" style="padding-top:30px; margin-top:30px; border-top:3px solid #333; min-height:500px; ">
 	<div class="container-fluid">
-		<h2>${username }님의 장바구니 정보</h2>
+		<c:if test="${empty cartList }">
+			<h2>회원님의 장바구니 정보</h2>
+		</c:if>	
+		<c:if test="${!empty cartList }">
+			<h2>${username }님의 장바구니 정보</h2>
+		</c:if>	
 		<table class="table">
 			<thead>
 				<tr><th>순번</th><th>상품명</th><th>가격</th><th>수량</th><th>&nbsp;</th></tr>
@@ -34,7 +39,7 @@
 					<td><fmt:formatNumber value="${cart.pprice }" type="currency" /></td>
 					<td>${cart.amount }</td>
 					<td>
-						<a href="${path1 }/ByCartAddSales.do?cno=${cart.cno }" class="btn btn-primary">구매</a>
+						<a href="${path1 }/AddSales.do?cno=${cart.cno }&pcode=${cart.pcode }&amount=${cart.amount }&id=${sid }" class="btn btn-primary">구매하기</a>
 						<a href="${path1 }/DeleteCart.do?cno=${cart.cno }" class="btn btn-danger">삭제</a>
 					</td>
 				</tr>

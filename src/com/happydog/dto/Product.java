@@ -70,4 +70,12 @@ public class Product {
 	public void setCate(String cate) {
 		this.cate = cate;
 	}
+	@Override
+	public String toString() {
+		return "Product [pcode=" + pcode + ", pname=" + pname + ", pstd="
+				+ pstd + ", pprice=" + pprice + ", pcom=" + pcom + ", amount="
+				+ amount + ", pic1=" + pic1 + ", pic2=" + pic2 + ", pic3="
+				+ pic3 + ", cate=" + cate + "]";
+	}
+	
 }

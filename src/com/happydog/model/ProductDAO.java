@@ -112,7 +112,7 @@ public class ProductDAO {
 		ArrayList<Product> proList = new ArrayList<Product>();
 		try {
 			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.PRODUCT_CATE_SELECT2);
+			pstmt = con.prepareStatement(Oracle11.PRODUCT_CATE_SELECT3);
 			pstmt.setString(1, cate);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
@@ -136,7 +136,8 @@ public class ProductDAO {
 		} finally {
 			Oracle11.close(rs, pstmt, con);
 		}
-		return proList; }
+		return proList; 
+	}
 	
 	//관리자용 품절 상품 목록 불러오기
 	public ArrayList<Product> getSoldoutProductList() {
