@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="com.happydog.dto.Product" project="pro02" 
     file="/pro02/src/com/happydog/dto/Product.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="488" y="129"/>    
+    <position height="-1" width="-1" x="487" y="139"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="com.happydog.dto.Order" project="pro02" 
     file="/pro02/src/com/happydog/dto/Order.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="678" width="152" x="565" y="-155"/>    
+    <position height="678" width="152" x="562" y="-178"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="com.happydog.dto.Cart" project="pro02" 
     file="/pro02/src/com/happydog/dto/Cart.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="792" y="-5"/>    
+    <position height="-1" width="-1" x="787" y="-28"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="com.happydog.dto.Pay" project="pro02" file="/pro02/src/com/happydog/dto/Pay.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="938" y="74"/>    
+    <position height="-1" width="-1" x="931" y="52"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="com.happydog.dto.Review" project="pro02" 
     file="/pro02/src/com/happydog/dto/Review.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1095" y="47"/>    
+    <position height="-1" width="-1" x="1084" y="24"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="com.happydog.dto.Notice" project="pro02" 
     file="/pro02/src/com/happydog/dto/Notice.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="193" y="84"/>    
+    <position height="-1" width="-1" x="195" y="59"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

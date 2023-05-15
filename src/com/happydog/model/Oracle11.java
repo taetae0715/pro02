@@ -64,11 +64,30 @@ public class Oracle11 {
 	final static String CNO_GENERATOR = "select cno from (select cno from cart order by cno desc) where rownum = 1";
 	
 	//판매 sales
-	/*final static String OCODE_GENERATOR = "select ocode from (select * from buy order by ocode desc) where rownum = 1";
-	final static String PNNO_GENERATOR = "select pnum from (select * from payment order by pnum desc) where rownum = 1";*/
-	final static String ADD_SALES = "insert into order1 values (ocode.nextval,?,?,?,?,default,?,?,?,?,?)";
-	final static String ADD_PAY = "insert into pay values (pno.nextval,?,?,?,?,?,default)";
+	final static String OCODE_GENERATOR = "select ocode from (select * from order1 order by ocode desc) where rownum = 1";
+	final static String PNO_GENERATOR = "select pno from (select * from pay order by pno desc) where rownum = 1";
+	//위에 두 코드는 주문번호, 결제번호 생성 코드인데 나는 시퀀스로 설정했기 때문에 생략하려고 했는데 null 나옴 그래서 그냥 생성했다~~
+	final static String ADD_SALES = "insert into order1 values (?,?,?,?,?,default,?,?,?,?,?)";
+	final static String ADD_PAY = "insert into pay values (?,?,?,?,?,?,default)";
 	final static String BUY_TRANS_CART = "delete from cart where cno=?";
+	
+	final static String BYID_BUY_LIST = "select * from order1 where id=? order by ocode desc";
+	final static String BYID_BUY = "select * from order1 where id=? and ocode=?";
+	final static String PAY_LIST = "select * from pay order by pno desc";
+	final static String BYOCODE_PAY = "select * from pay where ocode=? order by pno desc";
+	
+	final static String SALES_LIST = "select order1.ocode as ocode, order1.id as id, order1.pcode as pcode, order1.amount as amount, order1.price as price, order1.odate as odate, order1.ostate as ostate, order1.tel as tel, order1.dname as dname, order1.addr as addr, order1.dcode as dcode, pay.pno as pno, pay.type as type, pay.type_no as type_no from order1, pay where pay.ocode=order1.ocode order by order1.ocode";
+	final static String SALES_INFO = "select order1.ocode as ocode, order1.id as id, order1.pcode as pcode, order1.amount as amount, order1.price as price, order1.odate as odate, order1.ostate as ostate, order1.tel as tel, order1.dname as dname, order1.addr as addr, order1.dcode as dcode, pay.pno as pno, pay.type as type, pay.type_no as type_no from order1, pay where pay.ocode=order1.ocode and order1.ocode=? order by order1.ocode";
+	final static String BYID_SALES_LIST = "select order1.ocode as ocode, order1.id as id, order1.pcode as pcode, order1.amount as amount, order1.price as price, order1.odate as odate, order1.ostate as ostate, order1.tel as tel, order1.dname as dname, order1.addr as addr, order1.dcode as dcode, pay.pno as pno, pay.type as type, pay.type_no as type_no from order1, pay where pay.ocode=order1.ocode and order1.id=? order by order1.ocode";
+	final static String BYID_GET_SALE = "select order1.ocode as ocode, order1.id as id, order1.pcode as pcode, order1.amount as amount, order1.price as price, order1.odate as odate, order1.ostate as ostate, order1.tel as tel, order1.dname as dname, order1.addr as addr, order1.dcode as dcode, pay.pno as pno, pay.type as type, pay.type_no as type_no from order1, pay where pay.ocode=order1.ocode and id=? and order1.ocode=?";
+	
+	final static String UPDATE_SURVEY = "update order1 set dname=?, dcode=?, ostate=? where ocode=?";
+	final static String DELETE_ORDER = "delete from order1 where ocode=?";
+	final static String DELETE_PAY = "delete from pay where ocode=?";
+	
+	final static String RETURN_PRODUCT = "update product set amount=amount+? where pcode=?";
+	final static String RETURN_SALES = "update order1 set ostate='반품요청' where ocode=?";
+	final static String OK_SALES = "update order1 set ostate='구매완료' where ocode=?";
 	
 	//DB 연결
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {

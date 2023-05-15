@@ -17,9 +17,10 @@
 				<c:if test="${!empty sid }">
 					<li><a href="${path }/MyPage.do">${sid }님의 마이페이지</a></li>
 					<li><a href="${path }/MyCart.do?id=${sid }">장바구니</a></li>
+					<li><a href="${path }/MySalesList.do?id=${sid }">구매내역</a></li>
 					<li><a href="${path }/UserLogout.do">로그아웃</a></li>
 				</c:if>
-<%-- 				<c:if test="${sid=='admin' }">
+			<%--<c:if test="${sid=='admin' }">
 					<li><a href="${path }/Admin.do">관리자 페이지</a></li>
 				</c:if> --%>
 			</ul>
@@ -130,12 +131,12 @@
 		            <li><a href="${path1 }/AdminInventoryList.do">재고 관리</a></li>
 		            <li class="divider"></li>
 		            <li><a href="${path1 }/AdminCartList.do">장바구니 관리</a></li>
-		           	<li><a href="${path1 }/AdminCarryList.do">배송 관리</a></li>
+		           	<li><a href="${path1 }/Survey.do">배송 관리</a></li>
 		            <li><a href="${path1 }/AdminPayList.do">결제 관리</a></li>
 		          </ul>
 		        </li>
 		        <li class="dropdown" style="padding-right:30px; margin-right:30px;">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">글 관리 <span class="caret"></span></a>
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시글 관리 <span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
 		            <li><a href="${path1 }/AdminNoticeList.do">공지사항 관리</a></li>
 		            <li class="divider"></li>
@@ -143,7 +144,7 @@
 		            <li><a href="${path1 }/AdminQnaList.do">QNA 관리</a></li>
 		            <li class="divider"></li>
 		            <li><a href="${path1 }/AdminReviewList.do">고객 후기 관리</a></li>
-		            <li><a href="${path1 }/AdminDataList.do">홍보/이벤트 관리</a></li>
+		            <li><a href="${path1 }/AdminEventList.do">홍보/이벤트 관리</a></li>
 		          </ul>
 		        </li>
 		      </ul>

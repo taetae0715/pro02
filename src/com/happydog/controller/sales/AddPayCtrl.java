@@ -16,7 +16,7 @@ import com.happydog.model.SalesDAO;
 public class AddPayCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -30,18 +30,18 @@ public class AddPayCtrl extends HttpServlet {
 		Order order = new Order();
 		SalesDAO dao = new SalesDAO();
 		
-		order.setOcode(Integer.parseInt(request.getParameter("ocode")));
+		order.setOcode(dao.getOcodeGenerator());
 		order.setId(id);
 		order.setPcode(pcode);
 		order.setAmount(amount);
 		order.setPrice(request.getParameter("payamount"));
 		order.setTel(request.getParameter("tel"));
 		order.setAddr(request.getParameter("address1")+" "+request.getParameter("address2"));
-		order.setOstate("배송준비중");
+		order.setOstate("상품준비중");
 		order.setDname("");
 		order.setDcode("");
 
-		pay.setPno(Integer.parseInt(request.getParameter("pno")));
+		pay.setPno(dao.getPnoGenerator());
 		pay.setId(request.getParameter("id"));
 		pay.setOcode(order.getOcode());
 		pay.setType(request.getParameter("type"));

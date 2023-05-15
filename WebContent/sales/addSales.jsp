@@ -21,7 +21,7 @@
 	<div class="container-fluid">
 		<h2>상품 구매</h2>
 		<p>${msg }</p>
-		<form action="${path1 }/AddPayment.do" method="POST" onsubmit="return payCheck(this)">
+		<form action="${path1 }/AddPay.do" method="POST" onsubmit="return payCheck(this)">
 			<h3>구매 상품 정보</h3>
 			<table class="table">
 				<tbody>
@@ -30,13 +30,15 @@
 						<td>${pro.pname }
 							<input type="hidden" id="pname" name="pname" value="${pro.pname }">
 							<input type="hidden" id="cate" name="cate" value="${pro.cate }">
-							<input type="hidden" id="pcode" name="pcode" value="${pcode }">
-							<input type="hidden" id="id" name="id" value="${id }">
+							<input type="hidden" id="pcode" name="pcode" value="${pro.pcode }">
+							<input type="hidden" id="id" name="id" value="${user.id }">
 							<input type="hidden" id="name" name="name" value="${user.name }">
 							<input type="hidden" id="email" name="email" value="${user.email }">
 							<input type="hidden" id="utel" name="utel" value="${user.tel }">
 							<input type="hidden" id="uaddr" name="uaddr" value="${user.addr }">
-							<input type="hidden" id="cno" name="cno" value="${cno }">
+							<c:if test="${!empty cno}">
+								<input type="hidden" id="cno" name="cno" value="${cno }">
+							</c:if>
 						</td>
 					</tr>
 					<tr>
@@ -93,10 +95,10 @@
 					<tr>
 						<th>결제 수단</th>
 						<td>
-							<input type="hidden" name="conf" id="ptype">
-							<input type="radio" name="ptype" id="ptype1" value="신용카드" class="paytype" checked><label for="ptype1">신용카드</label> &nbsp;
-							<input type="radio" name="ptype" id="ptype2" value="체크카드" class="paytype"><label for="ptype2">체크카드</label> &nbsp;
-							<input type="radio" name="ptype" id="ptype3" value="계좌이체" class="paytype"><label for="ptype3">계좌이체</label> &nbsp;
+							<input type="hidden" name="conf" id="type">
+							<input type="radio" name="type" id="type1" value="신용카드" class="paytype" checked><label for="type1">신용카드</label> &nbsp;
+							<input type="radio" name="type" id="type2" value="체크카드" class="paytype"><label for="type2">체크카드</label> &nbsp;
+							<input type="radio" name="type" id="type3" value="계좌이체" class="paytype"><label for="type3">계좌이체</label> &nbsp;
 						</td>
 					</tr>
 					<tr>
@@ -108,9 +110,9 @@
 						</td>
 					</tr>
 					<tr>
-						<th><label for="paycom" id="ptnumLb">결제 번호</label></th>
+						<th><label for="paycom" id="type_noLb">결제 번호</label></th>
 						<td>			
-							<input type="text" name="ptnum" id="ptnum" class="form-control" required>
+							<input type="text" name="type_no" id="type_no" class="form-control" required>
 							<input type="hidden" name="payamount" id="payamount">
 							<input type="hidden" name="payck" id="payck" value="no">
 						</td>
@@ -149,7 +151,7 @@
 			$("#pay").click(function(){
 				proName = $("#pname").val();
 				if($("#amount").val()!="") {
-					totalPay = parseInt($("#price").val()) * parseInt($("#amount").val());
+					totalPay = parseInt($("#pprice").val()) * parseInt($("#amount").val());
 				} else {
 					alert("구매할 수량을 입력하지 않으셨습니다.");
 					$("#amount").focus();
@@ -237,7 +239,7 @@
 						//$("#payamount").val(rsp.paid_amount);
 						//$("#paymethod").val(rsp.pay_method);
 						//$("#paycom").val(rsp.pg_provider);
-						//$("#ptnum").val(rsp.apply_num);
+						//$("#type_no").val(rsp.apply_num);
 						//alert(msg);
 						//$("#paymentResult").html(r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
 					} else{
@@ -246,9 +248,9 @@
 					//테스트용이므로 실패시에도 그냥 통과시킴 그러므로 실제 사용시에는 아래 내용은 각주 처리하든지 지워야함
 					$("#payck").val("yes");
 					$("#payamount").val(totalPay);
-					//$("#ptype").val("카드");
+					//$("#type").val("카드");
 					//$("#paycom").val("삼성카드");
-					//$("#ptnum").val("123-1234-1234-1278");
+					//$("#type_no").val("123-1234-1234-1278");
 				});
 	 		});
 		});
@@ -257,50 +259,50 @@
 		$(document).ready(function(){
 			var card = ["BC카드", "KB국민카드", "삼성카드", "신한카드", "우리카드", "하나카드", "롯데카드", "현대카드", "NH농협카드"];
 			var bank = ["IBK기업은행", "하나은행", "농협은행", "우리은행", "우체국", "새마을금고", "신협", "한국씨티은행", "수협은행", "대구은행", "부산은행", "케이뱅크", "토스뱅크", "카카오뱅크"];
-			$("input[name='ptype']").change(function(){
+			$("input[name='type']").change(function(){
 				// 신용카드 결제 선택 시.
-				if($("#ptype1:checked").val() == '신용카드'){
-					$("#ptype").val("신용카드");
+				if($("#type1:checked").val() == '신용카드'){
+					$("#type").val("신용카드");
 					$('#paycomLb').text("신용카드사 또는 종류");
-					$('#ptnumLb').text("신용카드번호");
+					$('#type_noLb').text("신용카드번호");
 					$("#paycom").empty();
 					$("#paycom").append("<option value=''>선택안함</option>");
 					for(var key in card){
 						$("#paycom").append("<option value='"+card[key]+"'>"+card[key]+"</option>");
 					}
-					$('#ptnum').val("");
+					$('#type_no').val("");
 				}	
 				// 체크카드 결제 선택 시.
-				else if($("#ptype2:checked").val() == '체크카드'){
-					$("#ptype").val("체크카드");
+				else if($("#type2:checked").val() == '체크카드'){
+					$("#type").val("체크카드");
 					$('#paycomLb').text("체크카드사 또는 종류");
-					$('#ptnumLb').text("체크카드번호");
+					$('#type_noLb').text("체크카드번호");
 					$("#paycom").empty();
 					$("#paycom").append("<option value=''>선택안함</option>");
 					for(var key in card){
 						$("#paycom").append("<option value='"+card[key]+"'>"+card[key]+"</option>");
 					}
-					$('#ptnum').val("");
+					$('#type_no').val("");
 				}
 				// 계좌이체 결제 선택 시.
-				else if($("#ptype3:checked").val() == '계좌이체'){
-					$("#ptype").val("계좌이체");
-					$('#paycomLb').html("입금 은행 : 농협,<br> 예금주 : 더조은책방");
-					$('#ptnumLb').html("계좌 번호 :<br> 217-23-25639");
+				else if($("#type3:checked").val() == '계좌이체'){
+					$("#type").val("계좌이체");
+					$('#paycomLb').html("입금 은행 : 국민은행,<br> 예금주 : HappyDog");
+					$('#type_noLb').html("계좌 번호 :<br> 715-1023-9588");
 					$("#paycom").empty();
 					$("#paycom").append("<option value=''>선택안함</option>");
 					for(var key in bank){
 						$("#paycom").append("<option value='"+bank[key]+"'>"+bank[key]+"</option>");
 					}
-					$('#ptnum').val("");
+					$('#type_no').val("");
 				}
 			}).change();
 			
 			$("#pay").click(function(){
-				console.log($("#ptype").val());
+				console.log($("#type").val());
 				console.log($("#paycom").val());
-				console.log($("#ptnum").val());
-				$("#paymentResult").html($("#ptype").val()+"<br>"+$("#paycom").val()+"<br>"+$("#ptnum").val());
+				console.log($("#type_no").val());
+				$("#paymentResult").html($("#type").val()+"<br>"+$("#paycom").val()+"<br>"+$("#type_no").val());
 			});
 		});
 		function payCheck(f){
