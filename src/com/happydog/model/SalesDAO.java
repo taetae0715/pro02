@@ -252,7 +252,7 @@ public class SalesDAO {
 				rs = pstmt.executeQuery();
 				while(rs.next()){
 					Pay pay = new Pay();
-					pay.setPno(rs.getInt("pnum"));
+					pay.setPno(rs.getInt("pno"));
 					pay.setId(rs.getString("id"));
 					pay.setOcode(rs.getInt("ocode"));
 					pay.setType(rs.getString("type"));
@@ -281,7 +281,7 @@ public class SalesDAO {
 				pstmt.setInt(1, ocode);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
-					pay.setPno(rs.getInt("pnum"));
+					pay.setPno(rs.getInt("pno"));
 					pay.setId(rs.getString("id"));
 					pay.setOcode(rs.getInt("ocode"));
 					pay.setType(rs.getString("type"));
@@ -299,6 +299,7 @@ public class SalesDAO {
 			return pay;
 		}
 		
+		//관리자 배송정보 등록
 		public int surveyUpdate(Order order){
 			int cnt = 0;
 			try {
@@ -319,6 +320,7 @@ public class SalesDAO {
 			return cnt;
 		}
 
+		//반품 처리
 		public int cancleSales(int ocode, String pcode, int amount) {
 			int cnt = 0;
 			try {
@@ -349,6 +351,7 @@ public class SalesDAO {
 			return cnt;
 		}
 
+		//반품 요청 처리
 		public int returnSales(int ocode) {
 			int cnt = 0;
 			try {
@@ -366,6 +369,7 @@ public class SalesDAO {
 			return cnt;
 		}
 
+		//구매 완료 처리
 		public int okSales(int ocode) {
 			int cnt = 0;
 			try {

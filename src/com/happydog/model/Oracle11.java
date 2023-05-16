@@ -24,7 +24,7 @@ public class Oracle11 {
 	//회원 user
 	final static String USER_SELECT_ALL = "select * from user1 order by regdate desc";
 	final static String USER_LOGIN =  "select * from user1 where id=?";
-	final static String USER_VISIT_COUNT =  "update user1 set visited=visited+1 where id=?";
+	final static String USER_VISIT_COUNT = "update user1 set visited=visited+1 where id=?";
 	final static String INSET_USER = "insert into user1(id, pw, name, tel, addr, email) values (?,?,?,?,?,?)";
 	final static String UPDATE_USER = "update user1 set pw=?, name=?, tel=?, addr=?, email=? where id=?";
 	final static String UPDATE_USER2 = "update user1 set name=?, tel=?, addr=?, email=? where id=?";
@@ -51,6 +51,10 @@ public class Oracle11 {
 	final static String UPDATE_PRODUCT2 = "update product set pname=?, pstd=?, pprice=?, pcom=?, amount=?, pic1=?, pic2=?, pic3=?, cate=? where pcode=?";
 	final static String SALES_PRODUCT = "update product set amount=amount-? where pcode=?";
 	final static String DELETE_PRODUCT = "delete from product where pcode=?";
+	
+	final static String NOT_SALES_PRODUCT = "select * from product where pcode not in (select pcode from order1)";
+	final static String CATEGORY_ALL = "select * from category order by cate asc";
+	final static String CATEGORY_SELECT = "select * from category where categroup=? order by cate asc";
 	
 	//장바구니 cart
 	final static String CART_SELECT_ALL = "select * from cart order by cno desc";

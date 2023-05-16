@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />  
+<script src="${path }/jquery-1.10.1.min.js"></script>
+<script src="${path }/datatables.min.js"></script>
+<link rel="stylesheet" href="${path }/datatables.min.css">  
 <%
 	String sid = "";
 	if(session!=null) sid = (String) session.getAttribute("sid");  

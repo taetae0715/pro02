@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.happydog.dto.Notice;
 import com.happydog.dto.Product;
 import com.happydog.vo.CategoryVO;
 
@@ -15,6 +14,86 @@ public class ProductDAO {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	//0516 추가 카테고리 목록 불러오기
+	public ArrayList<CategoryVO> getCategoryList(){
+		ArrayList<CategoryVO> cateList = new ArrayList<CategoryVO>();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.CATEGORY_ALL);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				CategoryVO cate = new CategoryVO();
+				cate.setCate(rs.getString("cate"));
+				cate.setCategroup(rs.getString("categroup"));
+				cate.setCatename(rs.getString("catename"));
+				cateList.add(cate);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return cateList;
+	}
+	
+	//0516 추가 카테고리 그룹 불러오기
+	public ArrayList<CategoryVO> getCategoryName(String categroup) {
+		ArrayList<CategoryVO> cateList = new ArrayList<CategoryVO>();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.CATEGORY_SELECT);
+			pstmt.setString(1, categroup);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				CategoryVO cate = new CategoryVO();
+				cate.setCate(rs.getString("cate"));
+				cate.setCategroup(rs.getString("categroup"));
+				cate.setCatename(rs.getString("catename"));
+				cateList.add(cate);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return cateList;
+	}
+	
+	//0516 판매 안 된 상품 목록
+	public ArrayList<Product> notSalesList() {
+		ArrayList<Product> nList = new ArrayList<Product>();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.NOT_SALES_PRODUCT);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Product pro = new Product();
+				pro.setPcode(rs.getString("pcode"));
+				pro.setPname(rs.getString("pname"));
+				pro.setPstd(rs.getString("pstd"));
+				pro.setPprice(rs.getInt("pprice"));
+				pro.setPcom(rs.getString("pcom"));
+				pro.setAmount(rs.getInt("amount"));
+				pro.setPic1(rs.getString("pic1"));
+				pro.setPic2(rs.getString("pic2"));
+				pro.setPic3(rs.getString("pic3"));
+				pro.setCate(rs.getString("cate"));
+				nList.add(pro);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return nList;
+	}
 	
 	//상품(1개) 상세 보기
 	public Product getProduct(String pcode){
@@ -364,7 +443,7 @@ public class ProductDAO {
 		Oracle11.close(pstmt, con);
 		return cnt; }
 	
-	//상품 판매
+	//상품 판매 처리
 	public int salesProduct(String pcode, int amount){
 		int cnt =0 ;
 		try {
@@ -383,5 +462,4 @@ public class ProductDAO {
 		Oracle11.close(pstmt, con);
 		return cnt;
 	}
-	
 }

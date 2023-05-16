@@ -5,7 +5,7 @@ import java.util.Date;
 public class Review {
 	private	int	rcode;
 	private	String	id;
-	private	String	pcode;
+	private	int ocode;
 	private	String	resdate;
 	private	String	rcontent;
 	private	String	rpoint;
@@ -31,12 +31,12 @@ public class Review {
 		this.id = id;
 	}
 
-	public String getPcode() {
-		return pcode;
+	public int getPcode() {
+		return ocode;
 	}
 
-	public void setPcode(String pcode) {
-		this.pcode = pcode;
+	public void setPcode(int ocode) {
+		this.ocode = ocode;
 	}
 
 	public String getResdate() {
