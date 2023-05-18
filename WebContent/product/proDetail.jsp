@@ -66,6 +66,22 @@
 				</tr>
 			</tbody>
 		</table>
+		<table class="table">
+			<tbody>
+				<c:forEach var="rev" items="${rList }">
+				<tr>
+					<td>작성자 : ${rev.id }</td>
+					<td>내용 : ${rev.rcontent }</td>
+					<td>만족도 : ${rev.rpoint }</td>
+					<td>
+						<c:if test="${rev.id==sid }">
+							<a href="${path1 }/UpdateReview.do?rcode=${rev.rcode }" class="btn btn-primary">이용후기 수정</a>
+						</c:if>
+					</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		<c:if test="${sid.equals('admin') }">
 		<div class="btn-group">
 			<a href="${path1 }/InsertProduct.do" class="btn btn-primary">상품 등록</a>

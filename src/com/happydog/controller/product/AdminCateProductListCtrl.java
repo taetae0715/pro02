@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.happydog.dto.Product;
 import com.happydog.model.ProductDAO;
 
-@WebServlet("/AdminCategoryList.do")
+@WebServlet("/AdminCateProductList.do")
 public class AdminCateProductListCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

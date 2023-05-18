@@ -143,13 +143,13 @@
 		        <li class="dropdown" style="padding-right:30px; margin-right:30px;">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시글 관리 <span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
-		            <li><a href="${path1 }/AdminNoticeList.do">공지사항 관리</a></li>
+		            <li><a href="${path1 }/NoticeList.do">공지사항 관리</a></li>
 		            <li class="divider"></li>
-		            <li><a href="${path1 }/AdminFaqList.do">FAQ 관리</a></li>
-		            <li><a href="${path1 }/AdminQnaList.do">QNA 관리</a></li>
+		            <li><a href="${path1 }/FaqList.do">FAQ 관리</a></li>
+		            <li><a href="${path1 }/QnaList.do">QNA 관리</a></li>
 		            <li class="divider"></li>
 		            <li><a href="${path1 }/AdminReviewList.do">고객 후기 관리</a></li>
-		            <li><a href="${path1 }/AdminEventList.do">홍보/이벤트 관리</a></li>
+		            <li><a href="${path1 }/EventList.do">홍보/이벤트 관리</a></li>
 		          </ul>
 		        </li>
 		      </ul>

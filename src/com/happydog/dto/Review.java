@@ -31,11 +31,11 @@ public class Review {
 		this.id = id;
 	}
 
-	public int getPcode() {
+	public int getOcode() {
 		return ocode;
 	}
 
-	public void setPcode(int ocode) {
+	public void setOcode(int ocode) {
 		this.ocode = ocode;
 	}
 
