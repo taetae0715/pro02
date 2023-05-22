@@ -32,6 +32,7 @@ public class User {
 	public void setPoint(int point) { this.point = point; }
 	public int getVisited() { return visited; }
 	public void setVisited(int visited) { this.visited = visited; }
+	
 	public String getHpw() {
 		return hpw;
 	}

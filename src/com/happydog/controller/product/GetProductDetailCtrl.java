@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.happydog.dto.Product;
+import com.happydog.dto.Review;
 import com.happydog.model.ProductDAO;
+import com.happydog.model.ReviewDAO;
 
 @WebServlet("/ProductDetail.do")
 public class GetProductDetailCtrl extends HttpServlet {
@@ -29,6 +31,11 @@ public class GetProductDetailCtrl extends HttpServlet {
 		String cate = pro.getCate();
 		HashMap<String, String> cateMap = dao.getCategory(cate);
 		
+		//리뷰 불러오기
+		ReviewDAO rdao = new ReviewDAO();
+		ArrayList<Review> rList = rdao.getPcodeByReview(pcode);
+		
+		request.setAttribute("rList", rList);
 		request.setAttribute("pro", pro); //한 개의 상품 정보
 		request.setAttribute("cateMap", cateMap); //카테고리 정보
 		

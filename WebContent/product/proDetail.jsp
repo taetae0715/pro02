@@ -19,7 +19,7 @@
 <div class="content" style="padding-top:30px; margin-top:30px; border-top:3px solid #333; min-height:500px; ">
 	<div class="container-fluid">
 		<h3>상품 > <a href="${path1 }/ProductList.do?cate=${pro.cate}">${cateMap.catename }</a> > ${pro.pname }</h3>
-		<br><hr><br>
+		<br>
 		<fmt:setLocale value="ko_kr" />
 		<table class="table">
 			<tbody>
@@ -68,6 +68,10 @@
 		</table>
 		<table class="table">
 			<tbody>
+				<h3>사용자 후기</h3>
+				<c:if test="${empty rList }">
+					<p>등록된 후기가 없습니다.</p>
+				</c:if>
 				<c:forEach var="rev" items="${rList }">
 				<tr>
 					<td>작성자 : ${rev.id }</td>

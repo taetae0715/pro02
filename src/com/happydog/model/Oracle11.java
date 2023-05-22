@@ -97,8 +97,9 @@ public class Oracle11 {
 	final static String REVIEW_PRODUCT = "select * from product where pcode = (select pcode from order1 where ocode=?)";
 	final static String RCODE_GENERATOR = "select rcode from (select * from review order by rcode desc) where rownum = 1";
 	final static String ADD_REVIEW = "insert into review values (?,?,?,default,?,?)";
-	final static String PCODEBY_REVIEW = "select * from review where ocode=(select ocode from order1 where pcode=?) order by rcode desc";
+	//final static String PCODEBY_REVIEW = "select * from review where ocode=(select ocode from order1 where pcode=?) order by rcode desc";
 	final static String RCODEBY_REVIEW = "select * from review where rcode=?";
+	final static String RCODEBY_REVIEW2 = "select a.id as id,a.ocode as ocode,a.rcode as rcode,a.rcontent as rcontent,a.resdate as resdate,a.rpoint as rpoint, b.pcode as pcode from review a, order1 b where a.ocode=b.ocode and b.pcode=?";
 	final static String ALL_REVIEW = "select * from review order by rcode desc";
 	final static String UPDATE_REVIEW = "update review set resdate=sysdate, rcontent=?, rpoint=? where id=? and rcode=?";
 	final static String DELETE_REVIEW = "delete from review where rcode=?";

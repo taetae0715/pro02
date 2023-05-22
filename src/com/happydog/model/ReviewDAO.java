@@ -97,11 +97,12 @@ public class ReviewDAO {
 		ArrayList<Review> rList = new ArrayList<Review>();
 		try {
 			con = Oracle11.getConnection();
-			pstmt = con.prepareStatement(Oracle11.PCODEBY_REVIEW);
+			pstmt = con.prepareStatement(Oracle11.RCODEBY_REVIEW2);
 			pstmt.setString(1, pcode);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				Review rev = new Review();
+				System.out.println(rs.getInt("rcode"));
 				rev.setRcode(rs.getInt("rcode"));
 				rev.setId(rs.getString("id"));
 				rev.setOcode(rs.getInt("ocode"));
@@ -145,6 +146,32 @@ public class ReviewDAO {
 		}
 		return rev;
 	}
+	
+/*	//리뷰 한 건 불러오기2
+	public Review getRcodeByReview2(String pcode){
+		Review rev = new Review();
+		try {
+			con = Oracle11.getConnection();
+			pstmt = con.prepareStatement(Oracle11.RCODEBY_REVIEW2);
+			pstmt.setString(1, pcode);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				rev.setRcode(rs.getInt("rcode"));
+				rev.setId(rs.getString("id"));
+				rev.setOcode(rs.getInt("ocode"));
+				rev.setResdate(rs.getString("resdate"));
+				rev.setRcontent(rs.getString("rcontent"));
+				rev.setRpoint(rs.getString("rpoint"));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Oracle11.close(rs, pstmt, con);
+		}
+		return rev;
+	}*/
 	
 	//리뷰 수정하기
 	public int updateReview(Review rev){
